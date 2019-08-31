@@ -27,7 +27,7 @@ console.log(req.body.email);
    var newOrder={
     id : req.body.id,
     email: req.body.email,
-    /*number:req.body.number,
+    number:req.body.number,
     total_price:req.body.total_price,
     currency:req.body.currency,
     payment_gateway_names:req.body.payment_gateway_names,
@@ -40,7 +40,7 @@ console.log(req.body.email);
         address1:req.body.address1,
         city:req.body.city,
         zip:req.body.zip
-    }*/
+    }
    };
    Order.create(newOrder, function(err,newtodo){
         if(err)
