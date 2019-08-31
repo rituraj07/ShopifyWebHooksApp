@@ -19,6 +19,7 @@ app.use(express.static("public"));
 
 app.get("/",function(req,res){
    console.log("great");
+   res.send("great");
 });
 app.post("/getOrder",function(req,res){
 
