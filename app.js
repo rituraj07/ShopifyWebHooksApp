@@ -5,11 +5,11 @@ var Order=require("./models/order");
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds261377.mlab.com:61377/shopifyorders", { useNewUrlParser: true }).then(
+mongoose.connect("mongodb://rituraj07:qwert07@ds261377.mlab.com:61377/shopifyorders", { useNewUrlParser: true }).then(
     ()=>{
       console.log("connected to mongoDB")},
    (err)=>{
-       console.log("err",err);
+       console.log("errorrrr",err);
   });
 
 app.set("view engine","ejs");
@@ -58,4 +58,4 @@ app.delete("/apis/todoes/:id",function(req,res){
     });
 });
 //app.put("")
-app.listen(process.env.PORT );
+app.listen(process.env.PORT||3010 );
