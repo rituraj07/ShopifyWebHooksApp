@@ -22,7 +22,7 @@ app.get("/",function(req,res){
    res.send("great");
 });
 app.post("/getOrder",function(req,res){
-
+console.log(req.body);
    var newOrder={
     id : req.body.id,
     email: req.body.email,
@@ -57,4 +57,4 @@ app.delete("/apis/todoes/:id",function(req,res){
     });
 });
 //app.put("")
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT );
