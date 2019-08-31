@@ -22,8 +22,11 @@ app.get("/",function(req,res){
    res.send("great");
 });
 app.post("/getOrder",function(req,res){
-console.log(req.body.email);
+console.log(req.body.line_items.title);
 //res.send(toString(req.body));
+var billing_address={
+    id:
+}
    var newOrder={
     id : req.body.id,
     email: req.body.email,
@@ -31,16 +34,8 @@ console.log(req.body.email);
     total_price:req.body.total_price,
     currency:req.body.currency,
     payment_gateway_names:req.body.payment_gateway_names,
-    line_items:[{
-        id:req.body.line_items.id,
-        title:req.body.line_items.title
-    }],
-    billing_address:{
-        first_name:req.body.first_name,
-        address1:req.body.address1,
-        city:req.body.city,
-        zip:req.body.zip
-    }
+    line_items:req.body.line_items,
+    billing_address:req.body.billing_address
    };
    Order.create(newOrder, function(err,newtodo){
         if(err)
