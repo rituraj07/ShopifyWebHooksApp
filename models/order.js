@@ -6,11 +6,11 @@ var orderSchema = mongoose.Schema({
      number:Number,
      total_price:Number,
      currency:String,
-     payment_gateway_names:[{type:String}],
+    /* payment_gateway_names:[{type:String}],
      line_items:[{
          id:String,
          title:String
-     }],
+     }],*/
      billing_address:{
          first_name:String,
          address1:String,
