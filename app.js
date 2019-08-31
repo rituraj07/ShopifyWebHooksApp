@@ -24,9 +24,7 @@ app.get("/",function(req,res){
 app.post("/getOrder",function(req,res){
 console.log(req.body.line_items.title);
 //res.send(toString(req.body));
-var billing_address={
-    id:
-}
+
    var newOrder={
     id : req.body.id,
     email: req.body.email,
