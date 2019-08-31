@@ -22,8 +22,8 @@ app.get("/",function(req,res){
    res.send("great");
 });
 app.post("/getOrder",function(req,res){
-console.log(req.body);
-res.send(toString(req.body));
+console.log(req.body.email);
+//res.send(toString(req.body));
    var newOrder={
     id : req.body.id,
     email: req.body.email,
