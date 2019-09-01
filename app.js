@@ -18,7 +18,6 @@ app.use(flash());
 app.set("view engine","ejs");
 app.use(express.static('views'));
 
-
 app.get("/",function(req,res){
    console.log("great");
    Order.find({},function(err, allOrder){
@@ -50,7 +49,8 @@ app.get("/order/:id/edit",function(req,res){
         }
     });
     });
-app.put("/order/:id/edit",function(req,res){
+app.post("/order/:id/edit",function(req,res){
+
     var UpdateOrder={
         email: req.body.email,
         number:req.body.number,
@@ -60,15 +60,17 @@ app.put("/order/:id/edit",function(req,res){
         billing_address:req.body.billing_address
        };
        console.log(req.body);
-       console.log(req.body.email);
-        Order.findByIdAndUpdate(req.params.id,UpdateOrder,function(err,UpdateOrder){
+       console.log(req.body.line_items.title);
+        Order.findOneAndUpdate({id:req.params.id},UpdateOrder,function(err,UpdateOrder){
             if(err)
-            {console.log("err",err);}
+            {
+            res.redirect("/");}
             else{
                 res.redirect("/order/"+req.params.id);
             }
         });
     });
+
 app.post("/getOrder",function(req,res){
 console.log(req.body.line_items.title);
 //res.send(toString(req.body));

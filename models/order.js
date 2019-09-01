@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var orderSchema = mongoose.Schema({
 
-    id : {type: String,required:true},
+    id : {type: String,required:true,unique: true},
      email: {type: String,required:true},
      number:Number,
      total_price:Number,

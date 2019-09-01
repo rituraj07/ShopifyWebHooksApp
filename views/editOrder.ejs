@@ -7,12 +7,15 @@
 </head>
 
 <body>
+        <nav class="navbar navbar-light bg-light">
+                <a style="margin-left: 80px;" class="navbar-brand" href="/">home</a>
+              </nav>
     <div class="container">
         <div class="row">
-         <div style="    margin-left: 250px;" class="col-sm-6 col-sm-offset-3">
+         <div style="    margin-left: 25%;" class="col-sm-6 col-sm-offset-3">
             <h1 style="text-align: center;    margin-top: 20px;
             margin-bottom: 1px;">Edit Order</h1>
-          <form class="form" style="margin: 50px 30px 50px 30px;" method="post" action="/order/<%= order.id %>/edit?_method=PUT" enctype="multipart/form-data" >
+          <form class="form" style="margin: 50px 30px 50px 30px;"  action="/order/<%= order.id %>/edit" method="post" >
               <div class="form-group">
       <label for="email"> Email:</label>
       <input name="email" value="<%= order.email %>" type="text" class="form-control" required>
@@ -29,8 +32,38 @@
         <label for="pwd">Currency</label>
         <input name="currency" value="<%= order.currency %>" type="text" class="form-control" id="pwd">
     </div>
-   
-    <button type="submit" class="btn btn-warning">Submit</button>
+    <div class="form-group">
+            <label for="pwd">Line Items</label>
+            <%
+            var i=0;
+             order.line_items.forEach(function(item){ 
+                %>
+                <input style="display: none;" name="line_items[<%=i%>][id]" value="<%= item.id %>" type="text" class="form-control" id="pwd">
+                <input name="line_items[<%=i%>][title]" value="<%= item.title %>" type="text" class="form-control" id="pwd">
+                <% i++;});%> 
+          </div>
+          <div class="form-group">
+                <label style="font-size: 1.3em" for="pwd">Billing Address</label>
+            </div>
+      <div class="form-group">
+        <label for="pwd">Name</label>
+        <input name="billing_address[first_name]" type="text" value="<%= order.billing_address.first_name %>" class="form-control req"  id="pwd">
+      </div>
+       <div class="form-group">
+            <label for="pwd">Address</label>
+        <input name="billing_address[address1]" type="text" value="<%= order.billing_address.address1 %>" class="form-control req"  id="pwd">
+        </div>
+        <div class="form-group">
+          <label for="pwd">City</label>
+          <input name="billing_address[city]" type="text" value="<%= order.billing_address.city %>" class="form-control req"  id="pwd">
+        
+        </div>
+        <div class="form-group">
+                <label for="pwd">zip</label>
+                <input name="billing_address[zip]" type="text" value="<%= order.billing_address.zip %>" class="form-control req"  id="pwd">
+              
+              </div>
+    <input class="btn btn-warning" type="submit" value="Update">
           </form>
       </div>
       </div>
