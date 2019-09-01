@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+        <div class="container">
+                <header class="jumbotron">
+                <div class="container">
+                <h1>Welcome to Orders App</h1>  
+                </div>
+                </header>
+                <div class="row mycls text-center">
+                    <% orders.forEach(function(order){ %>
+                        
+                            <div class="card col-md-12">
+                                    <a href="order/<%= order.id %>">
+                            <div class="card-body">
+                              <h5 class="card-title"><%= order.email %></h5>
+                              <p class="card-text"></p>
+                              <p class="card-text"><small class="text-muted">Order id: <%= order.id %></small></p>
+                            </div>
+                        </a> 
+                          </div> 
+                          
+                 <% }); %>
+                 </div>
+                </div> 
+
+    <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#"> BazingaTestApp </a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</body>
+
+</html>

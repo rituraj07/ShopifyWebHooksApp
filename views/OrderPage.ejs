@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+        <div class="container">
+                <header class="jumbotron">
+                <div class="container">
+                <h1 style="padding-bottom: 20px">Welcome to Orders App</h1>  
+                <h6><strong>Email: </strong><%= order.email %></h6>
+                <h6><strong>Number: </strong><%= order.number %></h6>
+                <h6><strong>Price: </strong><%= order.total_price %></h6>
+                <h6><strong>Currency: </strong><%= order.currency %></h6>
+                <h6><strong>Line Items: </h6>
+                    <% order.line_items.forEach(function(item){ %>
+                        <h6><%= item.title %></h6>
+                        <% });%> 
+                <h6><strong>Billing Address: </strong><%= order.billing_address.first_name %>, <%= order.billing_address.address1 %>,<%=order.billing_address.city %>, <%=order.billing_address.zip %></h6>
+                </div>
+                <a class="btn btn-primary btn-large" style="    margin-left: 12px;" href="/order/<%=order.id%>/edit">edit order</a>
+                </header>
+                
+                </div> 
+
+    <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="#"> BazingaTestApp </a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</body>
+
+</html>

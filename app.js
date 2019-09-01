@@ -3,24 +3,72 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Order=require("./models/order");
 var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 mongoose.connect("mongodb://rituraj07:qwert07@ds261377.mlab.com:61377/shopifyorders", { useNewUrlParser: true }).then(
     ()=>{
       console.log("connected to mongoDB")},
    (err)=>{
        console.log("errorrrr",err);
   });
-
+var methodOverride = require("method-override");
+var flash = require("connect-flash");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(methodOverride("_method"));
+app.use(flash());
 app.set("view engine","ejs");
-app.use(express.static("public"));
-//app.use(MO("_method"));
+app.use(express.static('views'));
 
 
 app.get("/",function(req,res){
    console.log("great");
-   res.send("great");
+   Order.find({},function(err, allOrder){
+    if(err)
+    {console.log("1err");}
+    else{
+        res.render("index.ejs",{orders:allOrder});
+    }
 });
+});
+app.get("/order/:id",function(req,res){
+    //console.log(req.params.id);
+    Order.find({id:req.params.id},function(err,order){
+     if(err)
+     {console.log("1err");}
+     else{
+         console.log(order);
+         res.render("OrderPage.ejs",{order:order[0]});
+     }
+ });
+});
+app.get("/order/:id/edit",function(req,res){
+    Order.find({id:req.params.id},function(err,order){
+        if(err)
+        {console.log("1err");}
+        else{
+            console.log(order);
+            res.render("editOrder.ejs",{order:order[0]});
+        }
+    });
+    });
+app.put("/order/:id/edit",function(req,res){
+    var UpdateOrder={
+        email: req.body.email,
+        number:req.body.number,
+        total_price:req.body.price,
+        currency:req.body.currency,
+        line_items:req.body.line_items,
+        billing_address:req.body.billing_address
+       };
+       console.log(req.body);
+       console.log(req.body.email);
+        Order.findByIdAndUpdate(req.params.id,UpdateOrder,function(err,UpdateOrder){
+            if(err)
+            {console.log("err",err);}
+            else{
+                res.redirect("/order/"+req.params.id);
+            }
+        });
+    });
 app.post("/getOrder",function(req,res){
 console.log(req.body.line_items.title);
 //res.send(toString(req.body));
@@ -43,12 +91,5 @@ console.log(req.body.line_items.title);
         }
     }); 
 });
-app.delete("/apis/todoes/:id",function(req,res){
-    todo.findByIdAndRemove(req.params.id,function(err){
-        if(err)
-        {console.log(err);}
-        
-    });
-});
-//app.put("")
-app.listen(process.env.PORT||3010 );
+
+app.listen(process.env.PORT||3010);
